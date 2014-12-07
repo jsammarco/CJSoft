@@ -1,0 +1,28 @@
+extends ../layouts/default
+
+block content
+	.container: .row: .col-sm-10.col-sm-offset-1.col-md-8.col-md-offset-2
+		article
+			p: a(href='/products') &larr; Back to products
+			hr
+			if !data.product
+				h2 Invalid product.
+			else
+				header
+					h1= data.product.name
+					h3
+						if data.product.categories && data.product.categories.length
+							| in 
+							each cat, cat_i in data.product.categories
+								a(href='/products/' + cat.key)= cat.name
+								if cat_i < data.product.categories.length - 1
+									| , 
+								else
+									|  
+					h5
+						if data.product.creator
+							| Created by #{data.product.creator.name.first}
+				.product
+					if data.product.image.exists
+						.image-wrap: img(src=data.product._.image.fit(750,450)).img-responsive
+					!= data.product.content.full
