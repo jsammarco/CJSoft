@@ -5,22 +5,27 @@ mixin product(product)
 		if product.image.exists
 			a(href='/products/product/' + product.slug): img(src=product._.image.fit(160,160)).img.pull-right
 		h2: a(href='/products/product/' + product.slug)= product.name
-		p.text-muted Added 
+		p.text-muted
 			if product.publishedDate
 				| on #{product._.publishedDate.format('MMMM Do, YYYY')} 
 			if product.categories && product.categories.length
-				| in 
+				| Categories: 
 				each cat, i in product.categories
 					a(href='/products/' + cat.key)= cat.name
 					if i < product.categories.length - 1
 						| , 
 					else
 						|  
-			if product.creator
-				| by #{product.creator.name.first}
 		p!= product.content.brief
 		if product.content.extended
 			p.read-more: a(href='/products/product/' + product.slug) Read more...
+		if product.price > 0.00
+			h4
+				| $#{product.price} &nbsp;
+				if product.inventory
+					a(href='#').addToCart Add to Cart
+				else
+					span(style='color:red') Out of Stock
 
 block intro
 	.container

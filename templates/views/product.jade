@@ -10,19 +10,23 @@ block content
 			else
 				header
 					h1= data.product.name
-					h3
+					h4
 						if data.product.categories && data.product.categories.length
-							| in 
+							| Categories: 
 							each cat, cat_i in data.product.categories
 								a(href='/products/' + cat.key)= cat.name
 								if cat_i < data.product.categories.length - 1
 									| , 
 								else
 									|  
-					h5
-						if data.product.creator
-							| Created by #{data.product.creator.name.first}
 				.product
 					if data.product.image.exists
 						.image-wrap: img(src=data.product._.image.fit(750,450)).img-responsive
 					!= data.product.content.full
+					if data.product.price > 0.00
+						h4
+							| $#{data.product.price} &nbsp;
+							if data.product.inventory
+								a(href='#').addToCart Add to Cart
+							else
+								span(style='color:red') Out of Stock

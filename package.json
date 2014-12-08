@@ -1,5 +1,5 @@
 {
-  "name": "cjsoft",
+  "name": "CJSoft",
   "version": "0.0.0",
   "private": true,
   "dependencies": {
@@ -14,7 +14,7 @@
     "npm": ">=1.3.14"
   },
   "scripts": {
-    "start": "node keystone"
+    "start": "node cjsoft"
   },
-  "main": "keystone.js"
+  "main": "cjsoft.js"
 }
